@@ -22,6 +22,12 @@ export default {
           'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons|Roboto+Condensed|Montserrat'
       },
       {
+        rel: "stylesheet" ,
+        href: "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css",
+        integrity: "sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" ,
+        crossorigin:"anonymous"
+      },
+      {
         rel: 'stylesheet',
         href:
           'https://use.fontawesome.com/releases/v5.8.1/css/all.css'
@@ -47,6 +53,7 @@ export default {
   plugins: [
     '@/plugins/vuetify',
     {src: 'plugins/owl.js', ssr: false},
+    {src: 'plugins/pagination.js', ssr: false},
   ],
 
   /*

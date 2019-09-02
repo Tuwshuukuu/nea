@@ -5,20 +5,19 @@
         <v-content>
             <nuxt />
         </v-content>
-        <Fooder />
+        <Footer />
     </v-app>
 </template>
 
 <script>
 import AppBar from '~/components/AppBar.vue'
 import headerMenu from '~/components/headerMenu.vue'
-import Fooder from '~/components/Fooder.vue'
-
+import Footer from '~/components/Footer.vue'
 export default {
     components: {
         AppBar,
         headerMenu,
-        Fooder
+        Footer
     }
 }
 </script>

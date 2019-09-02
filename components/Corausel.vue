@@ -15,7 +15,6 @@
 <script>
     import Vue from "vue";
     import VueResource from "vue-resource";
-
     Vue.use(VueResource);
    
     export default {
@@ -29,10 +28,12 @@
         },
         methods: {
             convertImageUrl: function(url){
-                return "http://192.168.0.116/news/" + url;
+                return "http://192.168.1.16/news/" + url;
             },
             loadData: function(){
-                Vue.http.get('http://192.168.0.116:5000/r/home').then(this.successCallback, this.errorCallback);
+                console.log('api',process.env.API);
+                
+                Vue.http.get(`http://192.168.1.16:5000/r/home`).then(this.successCallback, this.errorCallback);
             },
             successCallback: function(result){
                 console.log("success carousel", result.body);

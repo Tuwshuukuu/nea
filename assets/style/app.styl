@@ -1,6 +1,12 @@
 // Import Vuetify styling
 @require '~vuetify/src/stylus/app.styl'
 
+.color
+   background-color: #0055b7
+
+.background_none
+   background: none!important
+
 .no-box-shadow
    box-shadow: none
 
@@ -39,6 +45,10 @@
 .submenu_height
    height: 30px;
 
+.submenu_height:hover
+  background-color:rgb(164,185,239)
+  opacity: 0.6
+
 .v-list__tile
    height: 30px;
 
@@ -76,4 +86,15 @@
 
 .submenu
    color: black
+   text-decoration: none
+
+.submenu:hover
+   text-decoration: none
+
+.footermenu
+   color: white
+   text-decoration: none
+
+.footermenu:hover
+   color: #4393ef
    text-decoration: none

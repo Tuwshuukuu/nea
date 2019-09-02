@@ -17,13 +17,14 @@
                   >{{ item.title }}</v-btn>
                 </template>
 
-                <v-list>
+                <v-list style="padding: 0!important">
                   <v-list-tile
                     v-for="(sub, index) in item.asas"
                     :key="index"
-                    class="submenu_height submenu_list">
+                    class="submenu_height">
+                    <router-link class="submenu" :to="{name:sub.linkName, params:{ id: sub.mainCatId, subCat: sub.submenuId}}">
                     <v-list-tile-title class="submenu_size submenu_height"
-                    ><router-link class="submenu" :to="{name:sub.linkName, params:{ id: sub.submenuId}}"> {{ sub.subtitle }}</router-link></v-list-tile-title>
+                    > {{ sub.subtitle }}</v-list-tile-title></router-link>
                   </v-list-tile>
                 </v-list>
                 <!-- <component v-bind:is="item.componentName"></component> -->
@@ -50,42 +51,42 @@ export default {
     return {
       menu: [
         {title: 'Зорилт',
-          asas: [{ subtitle: 'Цөмийн технологийг нэвтрүүлэх, судалгааг хөгжүүлэх', submenuId: '13', linkName: 'HTML'},
-                { subtitle: 'Цацраг идэвхт ашигт малтмалыг эдийн засгийн эргэлтэнд оруулах', submenuId: '12', linkName: 'HTML'},
-                { subtitle: 'Цөмийн болон цацрагийн аюулгүй байдал', submenuId: '14', linkName: 'HTML'},
-                { subtitle: 'Олон улсад өрсөлдөх чадвартай салбарыг хөгжүүлэх', submenuId: '15', linkName: 'HTML'}]},
+          asas: [{ subtitle: 'Цөмийн технологийг нэвтрүүлэх, судалгааг хөгжүүлэх', mainCatId:7, submenuId: '13', linkName: 'HTML'},
+                { subtitle: 'Цацраг идэвхт ашигт малтмалыг эдийн засгийн эргэлтэнд оруулах', mainCatId:7, submenuId: '12', linkName: 'HTML'},
+                { subtitle: 'Цөмийн болон цацрагийн аюулгүй байдал', mainCatId:7, submenuId: '14', linkName: 'HTML'},
+                { subtitle: 'Олон улсад өрсөлдөх чадвартай салбарыг хөгжүүлэх', mainCatId:7, submenuId: '15', linkName: 'HTML'}]},
         {title: 'Бидний тухай',
-          asas: [{ subtitle: 'Даргын мэндчилгээ', submenuId: '31', linkName: 'HTML'},
-                { subtitle: 'Эрхэм зорилго', submenuId: '31', linkName: 'HTML'},
-                { subtitle: 'Байгууллагын бүтэц', submenuId: '32', linkName: 'HTML'},
-                { subtitle: 'Байгууллагын түүх', submenuId: '32', linkName: 'HTML'},
-                { subtitle: 'Хамтын ажиллагаа', submenuId: '31', linkName: 'HTML'},
-                { subtitle: 'Төсөл хөтөлбөр', submenuId: '14', linkName: 'HTML'}]},
+          asas: [{ subtitle: 'Даргын мэндчилгээ', mainCatId: 13, submenuId: '50', linkName: 'HTML'},
+                { subtitle: 'Эрхэм зорилго', mainCatId: 13, submenuId: '52', linkName: 'HTML'},
+                { subtitle: 'Байгууллагын бүтэц', mainCatId: 13, submenuId: '39', linkName: 'HTML'},
+                { subtitle: 'Байгууллагын түүх', mainCatId: 13, submenuId: '51', linkName: 'HTML'},
+                { subtitle: 'Хамтын ажиллагаа', mainCatId: 13, submenuId: '53', linkName: 'HTML'},
+                { subtitle: 'Төсөл хөтөлбөр', mainCatId: 13, submenuId: '55', linkName: 'HTML'}]},
         {title: 'Үйлчилгээ',
-          asas: [{ subtitle: 'Сургалт', submenuId: '24', linkName: 'ListContent'},
-                { subtitle: 'Танин мэдэхүйн булан', submenuId: '46', linkName: 'ListContent'},
-                { subtitle: 'Асуулт хариулт', submenuId: '29', linkName: 'HTML'}]},
+          asas: [{ subtitle: 'Сургалт', mainCatId: 9, submenuId: '24', linkName: 'ListContent'},
+                { subtitle: 'Танин мэдэхүйн булан', mainCatId: 9, submenuId: '46', linkName: 'ListContent'},
+                { subtitle: 'Асуулт хариулт', mainCatId: 9, submenuId: '29', linkName: 'HTML'}]},
         {title: 'Хууль, эрх зүй',
-          asas: [{ subtitle: 'Салбарын хууль', submenuId: '25', linkName: 'FileList'},
-                { subtitle: 'Тогтоол, шийдвэр', submenuId: '27', linkName: 'FileList'},
-                { subtitle: 'Олон улсын гэрээ конвенци', submenuId: '40', linkName: 'FileList'},
-                { subtitle: 'Дүрэм журам', submenuId: '36', linkName: 'FileList'},
-                { subtitle: 'Үндэсний стандартууд', submenuId: '44', linkName: 'FileList'},
-                { subtitle: 'Зөвлөмж', submenuId: '49', linkName: 'FileList'}]},
+          asas: [{ subtitle: 'Салбарын хууль', mainCatId: 10, submenuId: '25', linkName: 'FileList'},
+                { subtitle: 'Тогтоол, шийдвэр', mainCatId: 10, submenuId: '27', linkName: 'FileList'},
+                { subtitle: 'Олон улсын гэрээ конвенци', mainCatId: 10, submenuId: '40', linkName: 'FileList'},
+                { subtitle: 'Дүрэм журам', mainCatId: 10, submenuId: '36', linkName: 'FileList'},
+                { subtitle: 'Үндэсний стандартууд', mainCatId: 10, submenuId: '44', linkName: 'FileList'},
+                { subtitle: 'Зөвлөмж',mainCatId: 10, submenuId: '49', linkName: 'FileList'}]},
         {title: 'Мэдээ мэдээлэл',
-          asas: [{ subtitle: 'Мэдээ', submenuId: '37', linkName: 'ListContent'},
-                { subtitle: 'Гадаад мэдээ', submenuId: '1', linkName: 'ListContent'},
-                { subtitle: 'Фото мэдээ', submenuId: '10', linkName: 'ListContent'},
-                { subtitle: 'Видео мэдээ', submenuId: '11', linkName: 'ListContent'},
-                { subtitle: 'Хэвлэлийн тойм', submenuId: '6', linkName: 'ListContent'},
-                { subtitle: 'Ярилцлага', submenuId: '34', linkName: 'ListContent'},
-                { subtitle: 'Нийтлэл', submenuId: '35', linkName: 'ListContent'},
-                { subtitle: 'Зарлал', submenuId: '', linkName: 'ListContent'},]},
+          asas: [{ subtitle: 'Мэдээ',  mainCatId: 6, submenuId: '37', linkName: 'ListContent'},
+                { subtitle: 'Гадаад мэдээ',  mainCatId: 6, submenuId: '1', linkName: 'ListContent'},
+                { subtitle: 'Фото мэдээ',  mainCatId: 6, submenuId: '10', linkName: 'ListContent'},
+                { subtitle: 'Видео мэдээ', mainCatId: 6, submenuId: '11', linkName: 'ListContent'},
+                { subtitle: 'Хэвлэлийн тойм',  mainCatId: 6, submenuId: '6', linkName: 'ListContent'},
+                { subtitle: 'Ярилцлага', mainCatId: 6, submenuId: '34', linkName: 'ListContent'},
+                { subtitle: 'Нийтлэл', mainCatId: 6, submenuId: '35', linkName: 'ListContent'},
+                { subtitle: 'Зарлал',  mainCatId: 6, submenuId: '35', linkName: 'ListContent'},]},
         {title: 'Ил тод байдал',
-          asas: [{ subtitle: 'Хүний нөөцийн ил тод байдал', submenuId: '19', linkName: 'ListContent'},
-                { subtitle: 'Үйл ажиллагааны ил тод байдал', submenuId: '19', linkName: 'ListContent'},
-                { subtitle: 'Авлигын эсрэг', submenuId: '22', linkName: 'ListContent'},
-                { subtitle: 'Өргөдөл гомдол', submenuId: '9', linkName: 'ListContent'},]},
+          asas: [{ subtitle: 'Хүний нөөцийн ил тод байдал', mainCatId: 8, submenuId: '19', linkName: 'ListContent'},
+                { subtitle: 'Үйл ажиллагааны ил тод байдал', mainCatId: 8, submenuId: '19', linkName: 'ListContent'},
+                { subtitle: 'Авлигын эсрэг', mainCatId: 8, submenuId: '22', linkName: 'ListContent'},
+                { subtitle: 'Өргөдөл гомдол', mainCatId: 8, submenuId: '9', linkName: 'ListContent'},]},
         {title: 'Шилэн данс'},
       ]
     }
@@ -93,7 +94,6 @@ export default {
   
   methods: {
     goTodetail(linkName, menuId) {
-      // console.log(name + "+" + menuId);
       this.$router.push({name:linkName, params:{id:menuId}})
     },
     menuItems () {

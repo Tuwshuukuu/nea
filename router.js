@@ -18,22 +18,22 @@ export function createRouter() {
             component: Home
         },
         {
-            path: '/list/:id',
+            path: '/list/:id/:subCat',
             name: 'ListContent',
             component: List
         },
         {
-            path: '/newsDetail',
+            path: '/newsDetail/:id/:subCatId/:postId',
             name: 'NewsDetail',
             component: NewsDetail
         },
         {
-            path: '/htmlcon/:id',
+            path: '/htmlcon/:id/:subCat',
             name: 'HTML',
             component: HTML
         },
         {
-            path: '/filelist/:id',
+            path: '/filelist/:id/:subCat',
             name: 'FileList',
             component: FileList
         },

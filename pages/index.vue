@@ -55,7 +55,7 @@
                                     <v-img
                                         class="mt-3"
                                         height="200px"
-                                        src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+                                        src=""
                                     >
                                     </v-img>
                                 </v-flex>
@@ -124,7 +124,7 @@
                     <v-img
                         class="mt-3"
                         height="300px"
-                        v-bind:src = "convertImageUrl(item.image)"
+                        v-bind:src = "item.image === null ? '../images/placeholder.jpg': 'convertImageUrl(image)'"
                         >
                     </v-img>
 
@@ -155,7 +155,7 @@
                     <v-img
                         class="mt-3"
                         height="300px"
-                        v-bind:src = "convertImageUrl(item.image_name)"
+                        v-bind:src = "item.image_name === null ? '../images/placeholder.jpg': 'convertImageUrl(image_name)'"
                         >
                     </v-img>
 
@@ -178,8 +178,9 @@
                 </v-card>
             </v-flex>
         </v-layout>
-        <v-layout wrap row class="my-4">
-            <v-flex v-for="i in 6" :key="i" lg2 sm4 xs12 class="pr-3 py-1">
+        <!-- <v-layout wrap row class="my-4"> -->
+        <carousel :autoplay="false" :nav="false" :dots="false" :responsive="{0:{items:1},600:{items:3},1000:{items:5}}" class="" v-if="renderComponent">
+            <v-flex v-for="(item, i) in partner" :key="i" :to ="{name:item.link }" xs12 class="pr-3 py-1">
                 <v-layout wrap row class="pa-3 btn-stl hover">
                     <v-flex xs4>
                         <v-img
@@ -191,12 +192,12 @@
                     </v-flex>
                     <v-flex xs8>
                         <span class="subtitle-1">
-                            Тусгай зөвшөөрөл
+                            {{ item.title }}
                         </span>
                     </v-flex>
                 </v-layout>
             </v-flex>
-        </v-layout>
+        </carousel>
     </v-container>
 </template>
 <script>
@@ -216,6 +217,7 @@
                 photoNews: [],
                 videoNews: [],
                 news: [],
+                partner: [],
                 renderComponent: false
             }
         },
@@ -223,11 +225,11 @@
             this.loadData();
         },
         methods: {
-            convertImageUrl: function(url){
-                return "http://192.168.0.116/news/" + url;
+            convertImageUrl: function(url){                
+                return `http://192.168.1.16/news/${url}`;
             },
             loadData: function(){
-                Vue.http.get('http://192.168.0.116:5000/r/home').then(this.successCallback, this.errorCallback);
+                Vue.http.get('http://192.168.1.16:5000/r/home').then(this.successCallback, this.errorCallback);
             },
             successCallback: function(result){
                 console.log("success", result.body);
@@ -236,6 +238,7 @@
                 this.photoNews = result.body.data.photoNews;
                 this.videoNews = result.body.data.videoNews;
                 this.news = result.body.data.news;
+                this.partner = result.body.data.partner;
                 this.renderComponent = true;
             },
             errorCallback: function(result){
