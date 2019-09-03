@@ -29,6 +29,7 @@
 
 import Vue from "vue";
 import VueResource from "vue-resource";
+import { environment } from '../config/environment';
 
 Vue.use(VueResource);
   export default {
@@ -67,14 +68,14 @@ Vue.use(VueResource);
             });
         },
         loadSideMenu: function(){
-            Vue.http.get('http://192.168.1.16:5000/r/subCategory/' + this.contentId).then(this.successCallbackMenu, error => {console.log});
+            Vue.http.get(`${environment.API_HOST}:5000/r/subCategory/${this.contentId}`).then(this.successCallbackMenu, error => {console.log});
         },
         successCallbackMenu: function(result){
             this.items = result.body.data;
             this.title = result.body.data[0].categoryMN;
         },
         loadMainContent: function(newsId){
-            Vue.http.get('http://192.168.1.16:5000/r/subCategoryPosts/' + newsId).then(this.successCallback, error => {console.log});
+            Vue.http.get(`${environment.API_HOST}:5000/r/subCategoryPosts/${newsId}`).then(this.successCallback, error => {console.log});
         },
         successCallback: function(result){
             console.log("success", result.body.data);

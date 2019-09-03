@@ -37,6 +37,7 @@
 <script>
   import Vue from "vue";
 import VueResource from "vue-resource";
+import { environment } from '../config/environment';
 
 Vue.use(VueResource);
   export default {
@@ -62,7 +63,7 @@ Vue.use(VueResource);
     },  
     methods: {
         convertImageUrl: function(url){                
-            return `http://192.168.1.16/news/${url}`;
+            return `${environment.API_HOST}/news/${url}`;
         },
         changeItems: function(id){
             this.loadMainContent(this.contentId, id);
@@ -70,14 +71,14 @@ Vue.use(VueResource);
             history.pushState({}, null, id);
         },
         loadSideMenu: function(){            
-            Vue.http.get('http://192.168.1.16:5000/r/subCategoryPosts/' + this.subCatId).then(this.successCallbackMenu, error => {console.log});
+            Vue.http.get(`${environment.API_HOST}:5000/r/subCategoryPosts/${this.subCatId}`).then(this.successCallbackMenu, error => {console.log});
         },
         successCallbackMenu: function(result){
             this.items = result.body.data;
             this.subCategoryName = result.body.data[0].subCategoryName;
         },
         loadMainContent: function(contentId, postId){
-            Vue.http.get(`http://192.168.1.16:5000/r/news/${contentId}/${postId}`).then(this.successCallback, error => {console.log});
+            Vue.http.get(`${environment.API_HOST}:5000/r/news/${contentId}/${postId}`).then(this.successCallback, error => {console.log});
         },
         successCallback: function(result){
             this.newsDetails = result.body.data;
