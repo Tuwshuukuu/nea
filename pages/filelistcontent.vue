@@ -21,7 +21,9 @@
                     <span class="font-weight-bold mx-auto">{{ subtitle }}</span>
                     <v-layout v-for="(item, i) in fileList" :key="i" class="border_bottom pa-3">
                         <v-flex xs11>{{item.title}}</v-flex>
-                        <v-flex xs1>Татах</v-flex>
+                        <v-flex xs1>
+                            <a :href="item.extra" download>Татах</a>
+                        </v-flex>
                     </v-layout>
                 </v-card>
             </v-flex>
@@ -60,22 +62,19 @@ Vue.use(VueResource);
     methods: {
         changeItems: function(index){
             this.contentId = index;
-            console.log("changed", index);
-            console.log("changed", this.contentId);
             this.loadMainContent(index);
+            history.pushState({}, null, index);
         },
         loadSideMenu: function(){
             Vue.http.get('http://192.168.1.16:5000/r/subCategory/' + this.contentId).then(this.successCallbackMenu, error => {console.log});
         },
         successCallbackMenu: function(result){
-            console.log("success", result.body.data);
             this.items = result.body.data;
         },
         loadMainContent: function(newsId){
             Vue.http.get('http://192.168.1.16:5000/r/subCategoryPosts/' + newsId).then(this.successCallback, error => {console.log});
         },
         successCallback: function(result){
-            console.log("success", result.body.data);
             this.fileList = result.body.data;
 
             this.fileList.map((item) => {

@@ -5,6 +5,7 @@ import List from '~/pages/listcontent'
 import NewsDetail from '~/pages/newsDetail'
 import HTML from '~/pages/htmlcontent'
 import FileList from '~/pages/filelistcontent'
+import AboutUs from '~/pages/aboutUs'
 
 Vue.use(Router)
 
@@ -36,6 +37,11 @@ export function createRouter() {
             path: '/filelist/:id/:subCat',
             name: 'FileList',
             component: FileList
+        },
+        {
+            path: '/aboutUs/:id/:subCat',
+            name: 'AboutUs',
+            component: AboutUs
         },
     ],
     
