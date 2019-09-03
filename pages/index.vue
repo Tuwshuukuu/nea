@@ -20,7 +20,9 @@
     <!-- </v-carousel> -->
     <v-layout wrap row>
       <v-flex xs12 class="pr-2">
-        <span class="font-weight-black headline black--text">Сүүлийн үеийн мэдээ</span>
+        <span
+          class="font-weight-black headline black--text"
+        >{{ lang === 'mn' ? 'Сүүлийн үеийн мэдээ': 'Latest News' }}</span>
         <v-layout wrap row>
           <v-flex lg7 xs12>
             <v-layout wrap row v-for="(item, i) in latestNews" :key="i" class="my-3">
@@ -36,10 +38,15 @@
                   class="grey--text font-weight-bold subtitle-2 robotoCondensed"
                 >{{ item.created_at }}</span>
                 <br />
-                <span class="main-color title-text robotoCondensed">{{ item.title }}</span>
+                <span
+                  class="main-color title-text robotoCondensed"
+                >{{ lang === 'mn' ? item.title: item.title_eng }}</span>
                 <br />
                 <br />
-                <span class="subtitle-1" v-html="item.intro_text"></span>
+                <span
+                  class="subtitle-1"
+                  v-html="lang === 'mn' ? item.intro_text: item.intro_text_eng"
+                ></span>
               </v-flex>
             </v-layout>
           </v-flex>
@@ -50,19 +57,21 @@
               </v-flex>
               <v-layout wrap row class="my-3">
                 <v-flex xs5 md5>
-                  <span class="indigo--text my-4">Бидний тухай</span>
+                  <span class="indigo--text my-4"></span>
                   <br />
-                  <span class="indigo--text my-4">Танилцуулга</span>
+                  <span class="indigo--text my-4"></span>
                   <br />
-                  <span class="indigo--text my-4">Видео контент</span>
+                  <span
+                    class="indigo--text my-4"
+                  >{{ lang === 'mn' ? 'Видео контент' : 'Video Content' }}</span>
                 </v-flex>
                 <v-flex xs7 md7>
-                  <span class="title py-4">Анхааруулга мэдээ</span>
+                  <span class="title py-4"></span>
                   <v-img class="mt-3" height="200px" src></v-img>
                 </v-flex>
               </v-layout>
               <v-flex xs12 md12 class="my-3">
-                <span class="font-weight-black headline black--text">Цөмийн энергийн комисс</span>
+                <span class="font-weight-black headline black--text"></span>
                 <br />
                 <div
                   class="subtitle-1 mt-3"
@@ -70,8 +79,12 @@
                   max-height="125px"
                 >Эгц, шулуун, хөндлөн биш, дагуу - Тууш замын нэгэн бяцхан буурчийн газар байжээ. Л.Түдэв. Уулын үер., тууш мод (шулуун мод), тууш шугамтай (шулуун шугамтай), тууш харилцаа (шууд харилцаа), тууш булчин (уртааш булчин), тууш судал (уртааш судал), зам тууш (замын дагуу)</div>
                 <br />
-                <v-btn class="ma-2" outline color="indigo">Дэлгэрэнгүй</v-btn>
-                <v-btn class="ma-2" outline color="indigo">Захирлын мэндчилгээ</v-btn>
+                <v-btn
+                  class="ma-2"
+                  outline
+                  color="indigo"
+                >{{ lang === 'mn' ? 'Дэлгэрэнгүй' : 'Read More' }}</v-btn>
+                <!-- <v-btn class="ma-2" outline color="indigo"></v-btn> -->
               </v-flex>
             </v-layout>
           </v-flex>
@@ -79,7 +92,9 @@
       </v-flex>
     </v-layout>
     <v-layout column>
-      <span class="font-weight-black headline black--text pb-3">Нийтлэлүүд</span>
+      <span
+        class="font-weight-black headline black--text pb-3"
+      >{{ lang === 'mn' ? 'Нийтлэлүүд' : 'Publications' }}</span>
       <carousel
         :autoplay="false"
         :nav="false"
@@ -90,11 +105,15 @@
       >
         <v-flex xs12 v-for="(item, i) in news" :key="i" class="pr-4">
           <v-card class="my-2" max-width="200">
-            <v-img class="white--text" height="200px" v-bind:src="convertImageUrl(item.image_name)"></v-img>
+            <v-img
+              class="white--text"
+              height="200px"
+              v-bind:src="item.image_name === null ? '../images/placeholder.jpg': convertImageUrl(item.image_name)"
+            ></v-img>
             <v-card-text>
               <span class="grey--text">{{ item.created_at }}</span>
               <br />
-              <span class="pt-2 main-color">{{ item.title }}</span>
+              <span class="pt-2 main-color">{{ lang === 'mn' ? item.title : item.title_eng }}</span>
             </v-card-text>
           </v-card>
         </v-flex>
@@ -102,59 +121,69 @@
     </v-layout>
     <v-layout wrap row class="my-4">
       <v-flex xs12 class="pb-3 text_center">
-        <p class="font-weight-black headline black--text">Үйлчилгээнүүд</p>
+        <p
+          class="font-weight-black headline black--text"
+        >{{ lang === 'mn' ? 'Үйлчилгээнүүд' : 'Services' }}</p>
       </v-flex>
       <v-layout wrap row class="mx-5">
         <v-flex v-for="i in 3" :key="i" lg4 sm4 xs12 class="pr-4 hover">
           <div class="mb-2 pa-3 btn-stl text_center">
             <v-img width="150px" height="80px" src="/images/logo.png" class="mx_auto" contain></v-img>
-            <span class="subtitle-1 font-weight-bold">Тусгай зөвшөөрөл</span>
+            <span
+              class="subtitle-1 font-weight-bold"
+            >{{ lang === 'mn' ? 'Тусгай зөвшөөрөл' : 'Special licence' }}</span>
           </div>
         </v-flex>
       </v-layout>
     </v-layout>
     <v-layout wrap row class="my-2">
       <v-flex lg6 xs12 class="pr-4 my-2">
-        <span class="font-weight-black headline black--text">Видео</span>
+        <span class="font-weight-black headline black--text">{{ lang === 'mn' ? 'Видео' : 'Video' }}</span>
         <v-card v-for="(item, i) in videoNews" :key="i">
           <v-img
             class="mt-3"
             height="300px"
-            v-bind:src="item.image === null ? '../images/placeholder.jpg': 'convertImageUrl(image)'"
+            v-bind:src="item.image === null ? '../images/placeholder.jpg': convertImageUrl(item.image)"
           ></v-img>
-
           <v-card-text>
             <span>{{ item.created_at }}</span>
             <br />
             <span class="text--primary">
-              <span>{{ item.title }}</span>
+              <span>{{ lang === 'mn' ? item.title : item.title_eng }}</span>
             </span>
           </v-card-text>
 
           <v-card-actions>
-            <v-btn outline color="orange" class="ml-auto">Илүү ихийг</v-btn>
+            <v-btn
+              outline
+              color="orange"
+              class="ml-auto"
+            >{{ lang === 'mn' ? 'Илүү ихийг' : 'Read More' }}</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
       <v-flex lg6 xs12 class="pr-4 my-2">
-        <span class="font-weight-black headline black--text">Зураг</span>
+        <span class="font-weight-black headline black--text">{{ lang === 'mn' ? 'Зураг' : 'Image' }}</span>
         <v-card v-for="(item, i) in photoNews" :key="i">
           <v-img
             class="mt-3"
             height="300px"
-            v-bind:src="item.image_name === null ? '../images/placeholder.jpg': 'convertImageUrl(image_name)'"
+            v-bind:src="item.image_name === null ? '../images/placeholder.jpg': convertImageUrl(item.image_name)"
           ></v-img>
-
           <v-card-text>
             <span>{{ item.created_at }}</span>
             <br />
             <span class="text--primary">
-              <span>{{ item.title }}</span>
+              <span>{{ lang === 'mn' ? item.title : item.title_eng }}</span>
             </span>
           </v-card-text>
 
           <v-card-actions>
-            <v-btn outline color="orange" class="ml-auto">Илүү ихийг</v-btn>
+            <v-btn
+              outline
+              color="orange"
+              class="ml-auto"
+            >{{ lang === 'mn' ? 'Илүү ихийг' : 'Read More' }}</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -195,6 +224,7 @@ export default {
   },
   data() {
     return {
+      lang: "",
       latestNews: [],
       photoNews: [],
       videoNews: [],
@@ -205,6 +235,7 @@ export default {
   },
   mounted: function() {
     this.loadData();
+    this.lang = localStorage.getItem("lang");
   },
   methods: {
     convertImageUrl: function(url) {

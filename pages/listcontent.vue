@@ -11,7 +11,7 @@
               :class="contentId == item.id ? 'submenu_list_active' : 'submenu_list'"
             >
               <v-list-tile-content v-on:click="changeItems(item.id)">
-                <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+                <v-list-tile-title>{{ lang === 'mn' ? item.name : item.name_eng }}</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
           </v-list>
@@ -29,7 +29,7 @@
             class="news_list pa-3"
           >
             <div class="mb-2">
-              <span class="font-weight-bold">{{item.title}}</span>
+              <span class="font-weight-bold">{{ lang === 'mn' ? item.title : item.title_eng }}</span>
             </div>
             <v-layout wrap row>
               <v-flex xs4>
@@ -37,14 +37,14 @@
               </v-flex>
               <v-flex xs8>
                 <div class="text--primary mx-2">
-                  <div v-html="item.intro_text"></div>
+                  <div v-html="lang === 'mn' ? item.intro_text : intro_text_eng"></div>
                   <br />
                   <v-btn
                     class="my-2"
                     outline
                     color="indigo"
                     @click="goTodetail(item.category_id, item.sub_category, item.id)"
-                  >Дэлгэрэнгүй</v-btn>
+                  >{{ lang === 'mn' ? 'Дэлгэрэнгүй' : 'Read More' }}</v-btn>
                 </div>
               </v-flex>
             </v-layout>
@@ -78,7 +78,8 @@ export default {
       pageCount: 0,
       pageSize: 5,
       currentPage: 0,
-      page: 1
+      page: 1,
+      lang: ''
     };
   },
   created() {
@@ -88,6 +89,7 @@ export default {
   mounted() {
     this.loadSideMenu();
     this.loadMainContent(this.subCat);
+    this.lang = localStorage.getItem("lang");
   },
   methods: {
     next(page) {

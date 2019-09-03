@@ -49,20 +49,16 @@ export default {
     console.log(this.$route.params.id);
   },
   mounted() {
-    console.log("mounted");
     this.loadSideMenu();
     this.loadMainContent(this.subCat);
   },
   methods: {
     changeItems: function(index) {
       this.contentId = index;
-      console.log("changed", index);
-      console.log("changed", this.contentId);
       history.pushState({}, null, index);
       this.mainContent.map((item, i) => {
         if (item.id === index) {
           this.contentHTML = item;
-          console.log(this.contentHTML);
         }
       });
     },
@@ -84,7 +80,6 @@ export default {
         });
     },
     successCallback: function(result) {
-      console.log("success", result.body.data);
       this.mainContent = result.body.data;
       this.contentHTML = result.body.data[0];
 

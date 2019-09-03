@@ -7,7 +7,6 @@
           <v-menu open-on-hover bottom offset-y v-for="(item, i) in menu" :key="i">
             <template v-slot:activator="{ on }">
               <v-btn class="robotoCondensed font-weight-bold subtitle-2 white--text" flat v-on="on">
-                <!---->
                 {{ lang === 'en' ? item.titleEn : item.title }}
               </v-btn>
             </template>
@@ -19,12 +18,11 @@
                   :to="{name:sub.linkName, params:{ id: sub.mainCatId, subCat: sub.submenuId}}"
                 >
                   <v-list-tile-title class="submenu_size submenu_height">
-                    {{ lang === 'en' ? sub.subTitleEn : sub.title }}
+                    {{ lang === 'en' ? sub.subTitleEn : sub.subtitle }}
                   </v-list-tile-title>
                 </router-link>
               </v-list-tile>
             </v-list>
-            <!-- <component v-bind:is="item.componentName"></component> -->
           </v-menu>
         </v-toolbar-items>
         <v-menu class="hidden-md-and-up">
