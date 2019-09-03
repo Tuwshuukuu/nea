@@ -8,7 +8,7 @@
                         <v-list-tile
                             v-for="item in items"
                             :key="item.title"
-                            :class="contentId == item.id ? 'submenu_list_active' : 'submenu_list'">
+                            :class="subCat == item.id ? 'submenu_list_active' : 'submenu_list'">
                             <v-list-tile-content v-on:click="changeItems(item.id)">
                                 <v-list-tile-title>{{ item.name }}</v-list-tile-title>
                             </v-list-tile-content>
@@ -54,9 +54,7 @@ Vue.use(VueResource);
     },  
     methods: {
         changeItems: function(index){
-            this.contentId = index;
-            console.log("changed", index);
-            console.log("changed", this.contentId);
+            this.subCat = index;
             history.pushState({}, null, index);
             this.mainContent.map((item, i) => {
                 if(item.id === index){
@@ -66,13 +64,13 @@ Vue.use(VueResource);
             });
         },
         loadSideMenu: function(){
-            Vue.http.get('http://192.168.1.16:5000/r/subCategory/' + this.contentId).then(this.successCallbackMenu, error => {console.log});
+            Vue.http.get('http://192.168.0.116:5000/r/subCategory/' + this.contentId).then(this.successCallbackMenu, error => {console.log});
         },
         successCallbackMenu: function(result){
             console.log("success", result.body.data);
         },
         loadMainContent: function(newsId){
-            Vue.http.get('http://192.168.1.16:5000/r/subCategoryPosts/' + newsId).then(this.successCallback, error => {console.log});
+            Vue.http.get('http://192.168.0.116:5000/r/subCategoryPosts/' + newsId).then(this.successCallback, error => {console.log});
         },
         successCallback: function(result){
             console.log("success", result.body.data);

@@ -28,12 +28,12 @@
         },
         methods: {
             convertImageUrl: function(url){
-                return "http://192.168.1.16/news/" + url;
+                return "http://192.168.0.116/news/" + url;
             },
             loadData: function(){
                 console.log('api',process.env.API);
                 
-                Vue.http.get(`http://192.168.1.16:5000/r/home`).then(this.successCallback, this.errorCallback);
+                Vue.http.get(`http://192.168.0.116:5000/r/home`).then(this.successCallback, this.errorCallback);
             },
             successCallback: function(result){
                 console.log("success carousel", result.body);

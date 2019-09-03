@@ -38,7 +38,7 @@
                       <v-list-tile-content>
                       <v-list-tile-title>{{ item.title }}</v-list-tile-title>
                       </v-list-tile-content>
-                  </v-list-tile>   
+                  </v-list-tile>
                 </v-list>
             </v-menu>
         </v-toolbar>
@@ -58,8 +58,8 @@ export default {
         {title: 'Бидний тухай',
           asas: [{ subtitle: 'Даргын мэндчилгээ', mainCatId: 13, submenuId: '50', linkName: 'AboutUs'},
                 { subtitle: 'Эрхэм зорилго', mainCatId: 13, submenuId: '52', linkName: 'AboutUs'},
-                { subtitle: 'Байгууллагын бүтэц', mainCatId: 13, submenuId: '39', linkName: 'AboutUs'},
-                { subtitle: 'Байгууллагын түүх', mainCatId: 13, submenuId: '51', linkName: 'AboutUs'},
+                // { subtitle: 'Байгууллагын бүтэц', mainCatId: 13, submenuId: '39', linkName: 'AboutUs'},
+                { subtitle: 'Байгууллагын түүх', mainCatId: 13, submenuId: '51', linkName: 'History'},
                 { subtitle: 'Хамтын ажиллагаа', mainCatId: 13, submenuId: '53', linkName: 'AboutUs'},
                 { subtitle: 'Төсөл хөтөлбөр', mainCatId: 13, submenuId: '55', linkName: 'AboutUs'}]},
         {title: 'Үйлчилгээ',
@@ -75,13 +75,13 @@ export default {
                 { subtitle: 'Зөвлөмж',mainCatId: 10, submenuId: '49', linkName: 'FileList'}]},
         {title: 'Мэдээ мэдээлэл',
           asas: [{ subtitle: 'Мэдээ',  mainCatId: 6, submenuId: '37', linkName: 'ListContent'},
-                { subtitle: 'Гадаад мэдээ',  mainCatId: 6, submenuId: '1', linkName: 'ListContent'},
+                { subtitle: 'Гадаад мэдээ',  mainCatId: 6, submenuId: '7', linkName: 'ListContent'},
                 { subtitle: 'Фото мэдээ',  mainCatId: 6, submenuId: '10', linkName: 'ListContent'},
                 { subtitle: 'Видео мэдээ', mainCatId: 6, submenuId: '11', linkName: 'ListContent'},
                 { subtitle: 'Хэвлэлийн тойм',  mainCatId: 6, submenuId: '6', linkName: 'ListContent'},
                 { subtitle: 'Ярилцлага', mainCatId: 6, submenuId: '34', linkName: 'ListContent'},
                 { subtitle: 'Нийтлэл', mainCatId: 6, submenuId: '35', linkName: 'ListContent'},
-                { subtitle: 'Зарлал',  mainCatId: 6, submenuId: '35', linkName: 'ListContent'},]},
+                { subtitle: 'Зарлал',  mainCatId: 6, submenuId: '8', linkName: 'ListContent'},]},
         {title: 'Ил тод байдал',
           asas: [{ subtitle: 'Хүний нөөцийн ил тод байдал', mainCatId: 8, submenuId: '19', linkName: 'ListContent'},
                 { subtitle: 'Үйл ажиллагааны ил тод байдал', mainCatId: 8, submenuId: '19', linkName: 'ListContent'},

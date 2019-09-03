@@ -71,7 +71,7 @@ export default {
           {title: 'Бидний тухай',
           asas: [{ subtitle: 'Даргын мэндчилгээ', mainCatId: 13, submenuId: '31', linkName: 'HTML'},
                 { subtitle: 'Эрхэм зорилго', mainCatId: 13, submenuId: '31', linkName: 'HTML'},
-                { subtitle: 'Байгууллагын бүтэц', mainCatId: 13, submenuId: '32', linkName: 'HTML'},
+                // { subtitle: 'Байгууллагын бүтэц', mainCatId: 13, submenuId: '32', linkName: 'HTML'},
                 { subtitle: 'Байгууллагын түүх', mainCatId: 13, submenuId: '32', linkName: 'HTML'},
                 { subtitle: 'Хамтын ажиллагаа', mainCatId: 13, submenuId: '31', linkName: 'HTML'},
                 { subtitle: 'Төсөл хөтөлбөр', mainCatId: 13, submenuId: '14', linkName: 'HTML'}]}
@@ -94,13 +94,13 @@ export default {
       menu4: [
           {title: 'Мэдээ мэдээлэл',
           asas: [{ subtitle: 'Мэдээ', mainCatId: 6, submenuId: '37', linkName: 'ListContent'},
-                { subtitle: 'Гадаад мэдээ', mainCatId: 6, submenuId: '1', linkName: 'ListContent'},
+                { subtitle: 'Гадаад мэдээ', mainCatId: 6, submenuId: '7', linkName: 'ListContent'},
                 { subtitle: 'Фото мэдээ', mainCatId: 6, submenuId: '10', linkName: 'ListContent'},
                 { subtitle: 'Видео мэдээ', mainCatId: 6, submenuId: '11', linkName: 'ListContent'},
                 { subtitle: 'Хэвлэлийн тойм', mainCatId: 6, submenuId: '6', linkName: 'ListContent'},
                 { subtitle: 'Ярилцлага', mainCatId: 6, submenuId: '34', linkName: 'ListContent'},
                 { subtitle: 'Нийтлэл', mainCatId: 6, submenuId: '35', linkName: 'ListContent'},
-                { subtitle: 'Зарлал', mainCatId: 6, submenuId: '', linkName: 'ListContent'},]}
+                { subtitle: 'Зарлал', mainCatId: 6, submenuId: '8', linkName: 'ListContent'},]}
       ],
       menu5: [
         {title: 'Ил тод байдал',

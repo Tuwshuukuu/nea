@@ -17,10 +17,26 @@
                 </v-card>
             </v-flex>
             <v-flex lg9 xs12 class="px-2">
-                <v-card class="pa-4">
-                    <h2 class="mb-3">{{contentHTML.title || "No title"}}</h2>
-                    <div v-html="this.contentHTML.intro_text"></div>
-                </v-card>
+                <v-carousel
+                    cycle
+                    height="400"
+                    hide-delimiter-background
+                    show-arrows-on-hover
+                >
+                    <v-carousel-item
+                        v-for="(item, i) in mainContent"
+                        :key="i"
+                        >
+                        <v-row
+                            class="fill-height pa-5"
+                            align="center"
+                            justify="center"
+                            >
+                            <div class="display-3">{{ item.title }} </div>
+                            <div v-html="item.intro_text"></div>
+                        </v-row>
+                    </v-carousel-item>
+                </v-carousel>
             </v-flex>
         </v-layout>
     </v-container>
@@ -37,7 +53,6 @@ Vue.use(VueResource);
         contentId: 0,
         items: [],
         mainContent: [],
-        contentHTML: {},
         title: "no title",
         subCat: 0
       }
@@ -55,14 +70,16 @@ Vue.use(VueResource);
     methods: {
         changeItems: function(index){
             this.subCat = index;
+            console.log("changed", index);
+            console.log("changed", this.contentId);
             this.loadMainContent(index);
             history.pushState({}, null, index);
-            this.mainContent.map((item, i) => {
-                if(item.id === index){
-                    this.contentHTML = item
-                    console.log(this.contentHTML);
-                }
-            });
+            // this.mainContent.map((item, i) => {
+            //     if(item.id === index){
+            //         this.contentHTML = item
+            //         console.log(this.contentHTML);
+            //     }
+            // });
         },
         loadSideMenu: function(){
             Vue.http.get('http://192.168.0.116:5000/r/subCategory/' + this.contentId).then(this.successCallbackMenu, error => {console.log});
@@ -77,13 +94,13 @@ Vue.use(VueResource);
         successCallback: function(result){
             console.log("success", result.body.data);
             this.mainContent = result.body.data;
-            this.contentHTML = result.body.data[0];
+            // this.contentHTML = result.body.data[0];
 
-            this.mainContent.map((item) => {
-                var sideMenuItem = {name: item.title || "no title", id: item.id};
-            });
+            // this.mainContent.map((item) => {
+            //     var sideMenuItem = {name: item.title || "no title", id: item.id};
+            // });
         },
     }
 
   }
-</script>x
+</script>

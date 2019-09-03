@@ -6,6 +6,7 @@ import NewsDetail from '~/pages/newsDetail'
 import HTML from '~/pages/htmlcontent'
 import FileList from '~/pages/filelistcontent'
 import AboutUs from '~/pages/aboutUs'
+import History from '~/pages/history'
 
 Vue.use(Router)
 
@@ -42,6 +43,11 @@ export function createRouter() {
             path: '/aboutUs/:id/:subCat',
             name: 'AboutUs',
             component: AboutUs
+        },
+        {
+            path: '/history/:id/:subCat',
+            name: 'History',
+            component: History
         },
     ],
     

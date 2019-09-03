@@ -8,9 +8,9 @@
                         <v-list-tile
                             v-for="item in items"
                             :key="item.title"
-                            :class="contentId == item.id ? 'submenu_list_active' : 'submenu_list'">
+                            :class="subCat == item.id ? 'submenu_list_active' : 'submenu_list'">
                             <v-list-tile-content  v-on:click="changeItems(item.id)">
-                                <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+                                <v-list-tile-title :id="item.id">{{ item.name }}</v-list-tile-title>
                             </v-list-tile-content>
                         </v-list-tile>
                     </v-list>
@@ -35,7 +35,7 @@
                             </v-flex>
                             <v-flex xs8>
                                 <div class="text--primary mx-2">
-                                    <div v-html="item.intro_text"></div><br />
+                                    <div v-html="item.intro_text.slice(0, 350)"></div><br />
                                     <v-btn class="my-2"  outline  color="indigo" 
                                         @click="goTodetail(item.category_id, item.sub_category, item.id)">Дэлгэрэнгүй
                                     </v-btn> 
@@ -93,25 +93,25 @@ Vue.use(VueResource);
             this.currentPage = page;  
         },
         convertImageUrl: function(url){                
-                return `http://192.168.1.16/news/${url}`;
+                return `http://192.168.0.116/news/${url}`;
             },
         goTodetail(catId, subCatId ,postId) {
             this.$router.push({path: `/newsDetail/${catId}/${subCatId}/${postId}`})
         },
         changeItems: function(index){
-            this.contentId = index;
+            this.subCat = index;
             this.loadMainContent(index);
             history.pushState({}, null, index);
         },
         loadSideMenu: function(){
-            Vue.http.get('http://192.168.1.16:5000/r/subCategory/' + this.contentId).then(this.successCallbackMenu, error => {console.log});
+            Vue.http.get('http://192.168.0.116:5000/r/subCategory/' + this.contentId).then(this.successCallbackMenu, error => {console.log});
         },
         successCallbackMenu: function(result){
             this.items = result.body.data;
             // console.table(this.items);
         },
         loadMainContent: function(newsId){
-            Vue.http.get('http://192.168.1.16:5000/r/subCategoryPosts/' + newsId).then(this.successCallback, error => {console.log});
+            Vue.http.get('http://192.168.0.116:5000/r/subCategoryPosts/' + newsId).then(this.successCallback, error => {console.log});
         },
         successCallback: function(result){
             this.newsList = result.body.data;
