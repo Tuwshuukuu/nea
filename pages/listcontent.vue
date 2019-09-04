@@ -3,7 +3,7 @@
     <v-layout wrap row>
       <v-flex lg3 xs12 class="px-2">
         <v-card class="pa-3">
-          <span class="font-weight-black headline black--text pl-3">{{ title }}</span>
+          <span class="font-weight-black headline black--text pl-3">{{ lang === 'mn' ? title: titleEn }}</span>
           <v-list dense>
             <v-list-tile
               v-for="item in items"
@@ -19,12 +19,11 @@
       </v-flex>
       <v-flex lg9 xs12 class="px-2">
         <v-card class="pa-3">
-          <span class="font-weight-black title black--text">{{ subtitle }}</span>
+          <span class="font-weight-black title black--text">{{ lang === 'mn' ? subtitle: subtitleEn }}</span>
           <v-layout
             column
             v-for="(item, i) in newsList.slice(this.currentPage * this.pageSize, (this.currentPage + 1) * this.pageSize)"
             :key="i"
-            v-bind:pagination.sync="pagination"
             hide-actions
             class="news_list pa-3"
           >
@@ -33,7 +32,12 @@
             </div>
             <v-layout wrap row>
               <v-flex xs4>
-                <v-img class="mx-1" height="200px" v-bind:src="convertImageUrl(item.image_name)"></v-img>
+                <v-img
+                  class="mx-1"
+                  height="200px"
+                  v-bind:src="
+                      item.image_name === null ? `${origin}/images/placeholder.jpg`: convertImageUrl(item.image_name)"
+                ></v-img>
               </v-flex>
               <v-flex xs8>
                 <div class="text--primary mx-2">
@@ -79,7 +83,10 @@ export default {
       pageSize: 5,
       currentPage: 0,
       page: 1,
-      lang: ''
+      lang: "",
+      origin: '',
+      subtitleEn: '',
+      titleEn: '',
     };
   },
   created() {
@@ -90,6 +97,8 @@ export default {
     this.loadSideMenu();
     this.loadMainContent(this.subCat);
     this.lang = localStorage.getItem("lang");
+    console.log(window.origin);
+    this.origin = window.origin;
   },
   methods: {
     next(page) {
@@ -129,7 +138,9 @@ export default {
       this.pageCount = Math.ceil(this.newsList.length / this.pageSize);
       this.newsList.map(item => {
         this.title = item.category;
+        this.titleEn = item.categoryEn;
         this.subtitle = item.subCategoryName;
+        this.subtitleEn = item.subCategoryNameEn;
       });
     }
   }

@@ -30,13 +30,17 @@
                 <v-img
                   class="border-radius"
                   height="200px"
-                  v-bind:src="convertImageUrl(item.image_name)"
+                  v-bind:src="lang === 'mn' ?
+                      item.image_name === null ? '../images/placeholder.jpg': convertImageUrl(item.image_name)
+                      :
+                      item.title_eng.length !== 0 ? item.image_name === null ? '../images/placeholder.jpg': convertImageUrl(item.image_name) : ''"
                 ></v-img>
               </v-flex>
               <v-flex lg8 xs12 class="pa-3">
                 <span
                   class="grey--text font-weight-bold subtitle-2 robotoCondensed"
-                >{{ item.created_at }}</span>
+                >{{ lang === 'mn' ? item.created_at : item.title_eng.length !== 0 ? item.created_at : '' }}</span>
+
                 <br />
                 <span
                   class="main-color title-text robotoCondensed"
@@ -104,14 +108,20 @@
         v-if="renderComponent"
       >
         <v-flex xs12 v-for="(item, i) in news" :key="i" class="pr-4">
+          {{ lang === 'mn' ? 'mn' : item.title_eng.length !== 0 ? 'with image' : 'no' }}
           <v-card class="my-2" max-width="200">
             <v-img
               class="white--text"
               height="200px"
-              v-bind:src="item.image_name === null ? '../images/placeholder.jpg': convertImageUrl(item.image_name)"
+              v-bind:src="lang === 'mn' ?
+                      item.image_name === null ? '../images/placeholder.jpg': convertImageUrl(item.image_name)
+                      :
+                      item.title_eng.length !== 0 ? item.image_name === null ? '../images/placeholder.jpg': convertImageUrl(item.image_name) : ''"
             ></v-img>
             <v-card-text>
-              <span class="grey--text">{{ item.created_at }}</span>
+              <span
+                class="grey--text"
+              >{{ lang === 'mn' ? item.created_at : item.title_eng.length !== 0 ? item.created_at : '' }}</span>
               <br />
               <span class="pt-2 main-color">{{ lang === 'mn' ? item.title : item.title_eng }}</span>
             </v-card-text>
@@ -143,10 +153,13 @@
           <v-img
             class="mt-3"
             height="300px"
-            v-bind:src="item.image === null ? '../images/placeholder.jpg': convertImageUrl(item.image)"
+            v-bind:src="lang === 'mn' ?
+                      item.image === null ? '../images/placeholder.jpg': convertImageUrl(item.image)
+                      :
+                      item.title_eng.length !== 0 ? item.image === null ? '../images/placeholder.jpg': convertImageUrl(item.image) : ''"
           ></v-img>
           <v-card-text>
-            <span>{{ item.created_at }}</span>
+            <span>{{ lang === 'mn' ? item.created_at : item.title_eng.length !== 0 ? item.created_at : '' }}</span>
             <br />
             <span class="text--primary">
               <span>{{ lang === 'mn' ? item.title : item.title_eng }}</span>
@@ -171,7 +184,7 @@
             v-bind:src="item.image_name === null ? '../images/placeholder.jpg': convertImageUrl(item.image_name)"
           ></v-img>
           <v-card-text>
-            <span>{{ item.created_at }}</span>
+            <span>{{ lang === 'mn' ? item.created_at : item.title_eng.length !== 0 ? item.created_at : '' }}</span>
             <br />
             <span class="text--primary">
               <span>{{ lang === 'mn' ? item.title : item.title_eng }}</span>
@@ -183,7 +196,8 @@
               outline
               color="orange"
               class="ml-auto"
-            >{{ lang === 'mn' ? 'Илүү ихийг' : 'Read More' }}</v-btn>
+            >{{ lang === 'mn' ? 'Илүү ихийг' : 'Read More' }}
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>

@@ -11,7 +11,7 @@
               :class="contentId == item.id ? 'submenu_list_active' : 'submenu_list'"
             >
               <v-list-tile-content v-on:click="changeItems(item.id)">
-                <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+                <v-list-tile-title>{{ lang === 'mn' ? item.name: item.name_eng }}</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
           </v-list>
@@ -47,7 +47,8 @@ export default {
       fileList: [],
       title: "no title",
       subtitle: "no title",
-      subCat: 0
+      subCat: 0,
+      lang: '',
     };
   },
   created() {
@@ -59,6 +60,7 @@ export default {
     console.log("mounted");
     this.loadSideMenu();
     this.loadMainContent(this.subCat);
+    this.lang = localStorage.getItem("lang");
   },
   methods: {
     changeItems: function(index) {
