@@ -61,9 +61,11 @@
               </v-flex>
               <v-layout wrap row class="my-3">
                 <v-flex xs5 md5>
-                  <span class="indigo--text my-4"></span>
+                  <span class="indigo--text my-4">{{ lang === 'mn' ? 'Бидний тухай' : 'About Us' }}</span>
                   <br />
-                  <span class="indigo--text my-4"></span>
+                  <span
+                    class="indigo--text my-4"
+                  >{{ lang === 'mn' ? 'Танилцуулга' : 'Introduction' }}</span>
                   <br />
                   <span
                     class="indigo--text my-4"
@@ -108,8 +110,7 @@
         v-if="renderComponent"
       >
         <v-flex xs12 v-for="(item, i) in news" :key="i" class="pr-4">
-          {{ lang === 'mn' ? 'mn' : item.title_eng.length !== 0 ? 'with image' : 'no' }}
-          <v-card class="my-2" max-width="200">
+          <v-card class="my-2" max-width="200" v-if="lang === 'mn' || item.title_eng.length > 0">
             <v-img
               class="white--text"
               height="200px"
@@ -150,55 +151,58 @@
       <v-flex lg6 xs12 class="pr-4 my-2">
         <span class="font-weight-black headline black--text">{{ lang === 'mn' ? 'Видео' : 'Video' }}</span>
         <v-card v-for="(item, i) in videoNews" :key="i">
-          <v-img
-            class="mt-3"
-            height="300px"
-            v-bind:src="lang === 'mn' ?
+          <div v-if="lang === 'mn' || item.title_eng.length > 0">
+            <v-img
+              class="mt-3"
+              height="300px"
+              v-bind:src="lang === 'mn' ?
                       item.image === null ? '../images/placeholder.jpg': convertImageUrl(item.image)
                       :
                       item.title_eng.length !== 0 ? item.image === null ? '../images/placeholder.jpg': convertImageUrl(item.image) : ''"
-          ></v-img>
-          <v-card-text>
-            <span>{{ lang === 'mn' ? item.created_at : item.title_eng.length !== 0 ? item.created_at : '' }}</span>
-            <br />
-            <span class="text--primary">
-              <span>{{ lang === 'mn' ? item.title : item.title_eng }}</span>
-            </span>
-          </v-card-text>
+            ></v-img>
+            <v-card-text>
+              <span>{{ lang === 'mn' ? item.created_at : item.title_eng.length !== 0 ? item.created_at : '' }}</span>
+              <br />
+              <span class="text--primary">
+                <span>{{ lang === 'mn' ? item.title : item.title_eng }}</span>
+              </span>
+            </v-card-text>
 
-          <v-card-actions>
-            <v-btn
-              outline
-              color="orange"
-              class="ml-auto"
-            >{{ lang === 'mn' ? 'Илүү ихийг' : 'Read More' }}</v-btn>
-          </v-card-actions>
+            <v-card-actions>
+              <v-btn
+                outline
+                color="orange"
+                class="ml-auto"
+              >{{ lang === 'mn' ? 'Илүү ихийг' : 'Read More' }}</v-btn>
+            </v-card-actions>
+          </div>
         </v-card>
       </v-flex>
       <v-flex lg6 xs12 class="pr-4 my-2">
         <span class="font-weight-black headline black--text">{{ lang === 'mn' ? 'Зураг' : 'Image' }}</span>
         <v-card v-for="(item, i) in photoNews" :key="i">
-          <v-img
-            class="mt-3"
-            height="300px"
-            v-bind:src="item.image_name === null ? '../images/placeholder.jpg': convertImageUrl(item.image_name)"
-          ></v-img>
-          <v-card-text>
-            <span>{{ lang === 'mn' ? item.created_at : item.title_eng.length !== 0 ? item.created_at : '' }}</span>
-            <br />
-            <span class="text--primary">
-              <span>{{ lang === 'mn' ? item.title : item.title_eng }}</span>
-            </span>
-          </v-card-text>
+          <div v-if="lang === 'mn' || item.title_eng.length !== 0">
+            <v-img
+              class="mt-3"
+              height="300px"
+              v-bind:src="item.image_name === null ? '../images/placeholder.jpg': convertImageUrl(item.image_name)"
+            ></v-img>
+            <v-card-text>
+              <span>{{ lang === 'mn' ? item.created_at : item.title_eng.length !== 0 ? item.created_at : '' }}</span>
+              <br />
+              <span class="text--primary">
+                <span>{{ lang === 'mn' ? item.title : item.title_eng }}</span>
+              </span>
+            </v-card-text>
 
-          <v-card-actions>
-            <v-btn
-              outline
-              color="orange"
-              class="ml-auto"
-            >{{ lang === 'mn' ? 'Илүү ихийг' : 'Read More' }}
-            </v-btn>
-          </v-card-actions>
+            <v-card-actions>
+              <v-btn
+                outline
+                color="orange"
+                class="ml-auto"
+              >{{ lang === 'mn' ? 'Илүү ихийг' : 'Read More' }}</v-btn>
+            </v-card-actions>
+          </div>
         </v-card>
       </v-flex>
     </v-layout>
@@ -244,7 +248,8 @@ export default {
       videoNews: [],
       news: [],
       partner: [],
-      renderComponent: false
+      renderComponent: false,
+      visible: true
     };
   },
   mounted: function() {
@@ -261,10 +266,20 @@ export default {
         .then(this.successCallback, this.errorCallback);
     },
     successCallback: function(result) {
-      //this.Corausel = result.body.data.carousel;
       this.latestNews = result.body.data.latestNews;
       this.photoNews = result.body.data.photoNews;
       this.videoNews = result.body.data.videoNews;
+      // if (this.lang === "en") {
+      //   console.log("en");
+      //   result.body.data.news.forEach(element => {
+      //     console.log('el', element.title_eng);
+      //     if (element.title_eng !== 0) {
+
+      //     }
+      //   });
+      // } else {
+      //   console.log("mn");
+      // }
       this.news = result.body.data.news;
       this.partner = result.body.data.partner;
       this.renderComponent = true;

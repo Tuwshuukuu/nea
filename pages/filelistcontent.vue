@@ -3,7 +3,7 @@
     <v-layout wrap row>
       <v-flex lg3 xs12 class="px-2">
         <v-card class="pa-3">
-          <span class="font-weight-black headline black--text pl-3">{{ title }}</span>
+          <span class="font-weight-black headline black--text pl-3">{{ lang === 'mn' ? title: titleEn }}</span>
           <v-list dense>
             <v-list-tile
               v-for="item in items"
@@ -19,7 +19,7 @@
       </v-flex>
       <v-flex lg9 xs12>
         <v-card class="pa-3">
-          <span class="font-weight-bold mx-auto">{{ subtitle }}</span>
+          <span class="font-weight-bold mx-auto">{{ lang === 'mn' ? subtitle: subtitleEn }}</span>
           <v-layout v-for="(item, i) in fileList" :key="i" class="border_bottom pa-3">
             <v-flex xs11>{{item.title}}</v-flex>
             <v-flex xs1>
@@ -48,7 +48,9 @@ export default {
       title: "no title",
       subtitle: "no title",
       subCat: 0,
-      lang: '',
+      lang: "",
+      subtitleEn: "",
+      titleEn: ""
     };
   },
   created() {
@@ -91,6 +93,8 @@ export default {
       this.fileList.map(item => {
         this.title = item.category;
         this.subtitle = item.subCategoryName;
+        this.titleEn = item.categoryEn;
+        this.subtitleEn = item.subCategoryNameEn;
       });
     }
   }

@@ -45,9 +45,13 @@ export default {
   methods: {
     changeLanguage(name) {
       localStorage.setItem("lang", name);
-      this.lang = localStorage.getItem('lang');
-      location.reload();
-      if (localStorage.getItem("lang") !== name) {
+      this.lang = localStorage.getItem("lang");
+      this.name = name;
+      console.log(name);
+      console.log(this.lang);
+      // location.reload();
+      if (this.lang  === this.name) {
+        console.log('yeaahh');
       } else {
         console.log("false");
       }

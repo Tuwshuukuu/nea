@@ -38,7 +38,6 @@ export default {
         .then(this.successCallback, this.errorCallback);
     },
     successCallback: function(result) {
-      console.log("success carousel", result.body);
       this.corausel = result.body.data.knowledgePost;
     },
     errorCallback: function(result) {

@@ -3,7 +3,9 @@
     <v-layout wrap row>
       <v-flex lg3 xs12 class="px-2">
         <v-card class="pa-3">
-          <span class="font-weight-black headline black--text pl-3">{{ lang === 'mn' ? title: titleEn }}</span>
+          <span
+            class="font-weight-black headline black--text pl-3"
+          >{{ lang === 'mn' ? title: titleEn }}</span>
           <v-list dense>
             <v-list-tile
               v-for="item in items"
@@ -19,7 +21,9 @@
       </v-flex>
       <v-flex lg9 xs12 class="px-2">
         <v-card class="pa-3">
-          <span class="font-weight-black title black--text">{{ lang === 'mn' ? subtitle: subtitleEn }}</span>
+          <span
+            class="font-weight-black title black--text"
+          >{{ lang === 'mn' ? subtitle: subtitleEn }}</span>
           <v-layout
             column
             v-for="(item, i) in newsList.slice(this.currentPage * this.pageSize, (this.currentPage + 1) * this.pageSize)"
@@ -27,31 +31,33 @@
             hide-actions
             class="news_list pa-3"
           >
-            <div class="mb-2">
-              <span class="font-weight-bold">{{ lang === 'mn' ? item.title : item.title_eng }}</span>
-            </div>
-            <v-layout wrap row>
-              <v-flex xs4>
-                <v-img
-                  class="mx-1"
-                  height="200px"
-                  v-bind:src="
+            <div v-if="lang === 'mn' || item.title_eng.length > 0">
+              <div class="mb-2">
+                <span class="font-weight-bold">{{ lang === 'mn' ? item.title : item.title_eng }}</span>
+              </div>
+              <v-layout wrap row>
+                <v-flex xs4>
+                  <v-img
+                    class="mx-1"
+                    height="200px"
+                    v-bind:src="
                       item.image_name === null ? `${origin}/images/placeholder.jpg`: convertImageUrl(item.image_name)"
-                ></v-img>
-              </v-flex>
-              <v-flex xs8>
-                <div class="text--primary mx-2">
-                  <div v-html="lang === 'mn' ? item.intro_text : intro_text_eng"></div>
-                  <br />
-                  <v-btn
-                    class="my-2"
-                    outline
-                    color="indigo"
-                    @click="goTodetail(item.category_id, item.sub_category, item.id)"
-                  >{{ lang === 'mn' ? 'Дэлгэрэнгүй' : 'Read More' }}</v-btn>
-                </div>
-              </v-flex>
-            </v-layout>
+                  ></v-img>
+                </v-flex>
+                <v-flex xs8>
+                  <div class="text--primary mx-2">
+                    <div v-html="lang === 'mn' ? item.intro_text : intro_text_eng"></div>
+                    <br />
+                    <v-btn
+                      class="my-2"
+                      outline
+                      color="indigo"
+                      @click="goTodetail(item.category_id, item.sub_category, item.id)"
+                    >{{ lang === 'mn' ? 'Дэлгэрэнгүй' : 'Read More' }}</v-btn>
+                  </div>
+                </v-flex>
+              </v-layout>
+            </div>
           </v-layout>
           <div class="text-right mt-3">
             <v-pagination v-model="page" :length="this.pageCount" @input="next" circle></v-pagination>
@@ -84,9 +90,9 @@ export default {
       currentPage: 0,
       page: 1,
       lang: "",
-      origin: '',
-      subtitleEn: '',
-      titleEn: '',
+      origin: "",
+      subtitleEn: "",
+      titleEn: ""
     };
   },
   created() {
