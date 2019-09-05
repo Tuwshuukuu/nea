@@ -1,6 +1,80 @@
 // Import Vuetify styling
 @require '~vuetify/src/stylus/app.styl'
 
+@media (min-width: 650px) and (max-width: 960px) {
+   // .footer-center{
+   //    text-align: center;  
+   // } 
+} 
+
+@media (min-width: 300px) and (max-width: 650px) {
+   .footer-center{
+      text-align: center;  
+   }
+   .row{
+      margin: 0!important;
+      }
+   .appbar{
+      padding: 0!important;
+   }
+   .contact{
+      display: none
+   }
+   .spacer{
+      display: none;
+      }
+   .list{
+      margin: 0!important;
+      }
+   .lastest_news_row{
+      margin: 0!important;
+      padding: 0!important;
+      }
+   .lastest_news{
+      padding: 0!important;
+      }
+   .partner{
+      margin: 0!important;
+      }
+   .photo_news{
+      padding-left: 0!important; 
+      }
+   .video_news{
+      padding-right: 0!important; 
+      }
+}
+
+.video_news
+   padding-right: 10px;
+
+.photo_news
+   padding-left: 10px;
+
+.partner
+   margin: 0 -15px
+
+.lastest_news_row
+   margin: 0 -7px;
+   padding: 0 20px;
+
+.lastest_news
+   padding-right: 10px; 
+
+.list
+   margin: 0 -16px; 
+
+.news-item
+   margin: 0 10px
+
+.news-item:first-child
+   margin: 0 10px 0 0
+
+.partner_list
+   margin: 0 10px
+
+.partner_list:first-child
+   margin: 0 10px 0 0
+
 .color
    background-color: #0055b7
 
@@ -98,3 +172,6 @@
 .footermenu:hover
    color: #4393ef
    text-decoration: none
+
+// @media only screen and (min-width: 960px, max-width: 1200px) {
+//    }

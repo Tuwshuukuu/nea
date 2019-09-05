@@ -74,12 +74,6 @@ Vue.use(VueResource);
             console.log("changed", this.contentId);
             this.loadMainContent(index);
             history.pushState({}, null, index);
-            // this.mainContent.map((item, i) => {
-            //     if(item.id === index){
-            //         this.contentHTML = item
-            //         console.log(this.contentHTML);
-            //     }
-            // });
         },
         loadSideMenu: function(){
             Vue.http.get('http://192.168.0.116:5000/r/subCategory/' + this.contentId).then(this.successCallbackMenu, error => {console.log});
@@ -94,11 +88,6 @@ Vue.use(VueResource);
         successCallback: function(result){
             console.log("success", result.body.data);
             this.mainContent = result.body.data;
-            // this.contentHTML = result.body.data[0];
-
-            // this.mainContent.map((item) => {
-            //     var sideMenuItem = {name: item.title || "no title", id: item.id};
-            // });
         },
     }
 

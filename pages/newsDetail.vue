@@ -9,7 +9,7 @@
                         <v-list-tile
                             v-for="item in items.slice(0, 10)"
                             :key="item.title"
-                            :class="postId == item.id ? 'submenu_list_active' : 'submenu_list'">
+                            :class="subCat == item.id ? 'submenu_list_active' : 'submenu_list'">
                             <v-list-tile-content v-on:click="changeItems(item.id)">
                                 <v-list-tile-title>{{ item.title }}</v-list-tile-title>
                             </v-list-tile-content>
@@ -37,6 +37,7 @@
 <script>
   import Vue from "vue";
 import VueResource from "vue-resource";
+import { environment } from '../config/environment';
 
 Vue.use(VueResource);
   export default {
@@ -61,23 +62,23 @@ Vue.use(VueResource);
         this.loadMainContent(this.contentId, this.postId);
     },  
     methods: {
-        convertImageUrl: function(url){                
-            return `http://192.168.0.116/news/${url}`;
+        convertImageUrl: function(url){
+            return `${environment.API_HOST}/news/${url}`;
         },
         changeItems: function(id){
             this.loadMainContent(this.contentId, id);
             this.postId = id;
             history.pushState({}, null, id);
         },
-        loadSideMenu: function(){            
-            Vue.http.get('http://192.168.0.116:5000/r/subCategoryPosts/' + this.subCatId).then(this.successCallbackMenu, error => {console.log});
+        loadSideMenu: function(){
+            Vue.http.get(`${environment.API_HOST}:5000/r/subCategoryPosts/${this.subCatId}`).then(this.successCallbackMenu, error => {console.log});
         },
         successCallbackMenu: function(result){
             this.items = result.body.data;
             this.subCategoryName = result.body.data[0].subCategoryName;
         },
         loadMainContent: function(contentId, postId){
-            Vue.http.get(`http://192.168.0.116:5000/r/news/${contentId}/${postId}`).then(this.successCallback, error => {console.log});
+            Vue.http.get(`${environment.API_HOST}:5000/r/news/${contentId}/${postId}`).then(this.successCallback, error => {console.log});
         },
         successCallback: function(result){
             this.newsDetails = result.body.data;
