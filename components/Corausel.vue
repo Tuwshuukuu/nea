@@ -22,7 +22,8 @@ Vue.use(VueResource);
 export default {
   data() {
     return {
-      corausel: []
+      corausel: [],
+      test: []
     };
   },
   mounted: function() {
@@ -30,7 +31,7 @@ export default {
   },
   methods: {
     convertImageUrl: function(url) {
-      return `${environment.API_HOST}/news/${url}`;
+      return `${environment.API_HOST}/uploads/${url}`;
     },
     loadData: function() {
       Vue.http
@@ -38,7 +39,6 @@ export default {
         .then(this.successCallback, this.errorCallback);
     },
     successCallback: function(result) {
-      console.log("success carousel", result.body);
       this.corausel = result.body.data.knowledgePost;
     },
     errorCallback: function(result) {

@@ -1,11 +1,36 @@
 import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
 import pkg from './package'
 import dotenv from 'dotenv'
+import Axios from 'axios';
+import {environment} from './config/environment';
+import axios from 'axios'
+
 dotenv.config();
 
 export default {
   mode: 'universal',
+  // generate: {
+  //   routes: ['/']
+  // },
+  // :to="{name:sub.linkName, params:{ id: sub.mainCatId, subCat: sub.submenuId}}"
 
+  generate: {
+    routes: () => {
+      // fetch(`${environment.API_HOST}:5000/category`).then(res => res.json()).then((res) => {
+      //   res.data.map((id) => {
+      //     return `list/${id}`
+      //   })
+      // });
+      axios.get(`${environment.API_HOST}:5000/category`).then((res) => {
+        res.data.map((id) => {
+          return `list/${id}`
+          // Axios.get(`${environment.API_HOST}:5000/subCategory/${id}`).then((subId) => {
+            
+          // })
+        })
+      })
+    }
+  },
   /*
   ** Headers of the page
   */

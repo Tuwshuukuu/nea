@@ -27,7 +27,8 @@
             hide-actions
             class="news_list pa-3"
           >
-            <div class="mb-2">
+            <div v-if="lang === 'mn' || item.title_eng.length > 0">
+              <div class="mb-2">
               <span class="font-weight-bold">{{ lang === 'mn' ? item.title : item.title_eng }}</span>
             </div>
             <v-layout wrap row>
@@ -52,6 +53,7 @@
                 </div>
               </v-flex>
             </v-layout>
+            </div>
           </v-layout>
           <div class="text-right mt-3">
             <v-pagination v-model="page" :length="this.pageCount" @input="next" circle></v-pagination>
@@ -105,7 +107,7 @@ export default {
       this.currentPage = page;
     },
     convertImageUrl: function(url) {
-      return `${environment.API_HOST}/news/${url}`;
+      return `${environment.API_HOST}/uploads/${url}`;
     },
     goTodetail(catId, subCatId, postId) {
       this.$router.push({ path: `/newsDetail/${catId}/${subCatId}/${postId}` });

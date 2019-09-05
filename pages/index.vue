@@ -53,8 +53,8 @@
                         </v-flex>
                         <v-layout wrap row class="my-3 px-3">
                             <v-flex xs5 md5>
-                                <span class="indigo--text my-4">Бидний тухай</span><br />
-                                <span class="indigo--text my-4">Танилцуулга</span><br />
+                                <span class="indigo--text my-4">{{ lang === 'mn' ? 'Бидний тухай' : 'About Us' }}</span><br />
+                                <span class="indigo--text my-4">{{ lang === 'mn' ? 'Танилцуулга' : 'Introduction' }}</span><br />
                                 <span class="indigo--text my-4">{{ lang === 'mn' ? 'Видео контент' : 'Video Content' }}</span>
                             </v-flex>
                             <v-flex xs7 md7>
@@ -80,10 +80,11 @@
         <v-layout column class="list">
             <span class="font-weight-black headline black--text pb-3">{{ lang === 'mn' ? 'Нийтлэлүүд' : 'Publications' }}</span>
             <carousel :autoplay="false" :nav="false" :dots="false" :responsive="{0:{items:2},600:{items:2},1000:{items:5}}" class="" v-if="renderComponent">
-                <v-flex xs12 v-for="(item, i) in news" :key="i" class="news-item">{{ lang === 'mn' ? 'mn' : item.title_eng.length !== 0 ? 'with image' : 'no' }}
-                    <v-card
+                <v-flex xs12 v-for="(item, i) in news" :key="i" class="news-item">
+                      <v-card
                         class="my-2 hover"
                         @click="goTodetail(item.category_id, item.sub_category, item.id)"
+                        v-if="lang === 'mn' || item.title_eng.length > 0"
                     >
                         <v-img
                         class="white--text"
@@ -126,7 +127,8 @@
                     v-for="(item, i) in videoNews"
                     :key="i"
                     >
-                    <v-img
+                    <div v-if="lang === 'mn' || item.title_eng.length > 0">
+                      <v-img
                         class="mt-3"
                         height="300px"
                         v-bind:src="lang === 'mn' ?
@@ -153,6 +155,7 @@
                             {{ lang === 'mn' ? 'Илүү ихийг' : 'Read More' }}
                         </v-btn>
                     </v-card-actions>
+                    </div>
                 </v-card>
             </v-flex>
             <v-flex xs12 sm6 lg6 class="photo_news my-2">
@@ -161,7 +164,8 @@
                     v-for="(item, i) in photoNews" 
                     :key="i"
                     >
-                    <v-img
+                    <div v-if="lang === 'mn' || item.title_eng.length > 0">
+                      <v-img
                         class="mt-3"
                         height="300px"
                         v-bind:src="item.image_name === null ? '../images/placeholder.jpg': convertImageUrl(item.image_name)"
@@ -185,6 +189,7 @@
                             {{ lang === 'mn' ? 'Илүү ихийг' : 'Read More' }}
                         </v-btn>
                     </v-card-actions>
+                    </div>
                 </v-card>
             </v-flex>
         </v-layout>
@@ -238,7 +243,7 @@ export default {
   },
   methods: {
     convertImageUrl: function(url) {
-      return `${environment.API_HOST}/news/${url}`;
+      return `${environment.API_HOST}/uploads/${url}`;
     },
     loadData: function() {
       Vue.http

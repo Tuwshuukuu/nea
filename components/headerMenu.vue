@@ -23,6 +23,12 @@
               </v-list-tile>
             </v-list>
           </v-menu>
+          <a href="https://www.shilendans.gov.mn/org/546" style="height: 100%" target="_blank">
+            <v-btn
+              class="robotoCondensed font-weight-bold subtitle-2 white--text"
+              flat
+            >{{ lang === 'en' ? 'Financial transparency' : 'Шилэн данс' }}</v-btn>
+          </a>
         </v-toolbar-items>
         <v-menu class="hidden-md-and-up">
           <v-toolbar-side-icon slot="activator" class="white--text"></v-toolbar-side-icon>
@@ -42,7 +48,7 @@
   </div>
 </template>
 <script>
-import environment from "../config/environment";
+import {environment} from "../config/environment";
 export default {
   data() {
     return {
@@ -321,10 +327,6 @@ export default {
               linkName: "ListContent"
             }
           ]
-        },
-        { 
-          title: "Шилэн данс",
-          titleEn: "Financial transparency"   
         }
       ]
     };
@@ -340,9 +342,6 @@ export default {
       return this.menu;
     }
   },
+}
 
-  beforeUpdate() {
-    console.log("lang", this.lang);
-  }
-};
 </script>

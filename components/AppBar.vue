@@ -47,11 +47,7 @@ export default {
       localStorage.setItem("lang", name);
       this.lang = localStorage.getItem('lang');
       location.reload();
-      if (localStorage.getItem("lang") !== name) {
-      } else {
-        console.log("false");
-      }
-    }
+          }
   }
 };
 </script>

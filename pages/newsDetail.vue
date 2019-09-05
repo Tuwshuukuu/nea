@@ -63,7 +63,7 @@ Vue.use(VueResource);
     },  
     methods: {
         convertImageUrl: function(url){
-            return `${environment.API_HOST}/news/${url}`;
+            return `${environment.API_HOST}/uploads/${url}`;
         },
         changeItems: function(id){
             this.loadMainContent(this.contentId, id);
