@@ -17,7 +17,7 @@
     "bootstrap": "^4.3.1",
     "cross-env": "^5.2.0",
     "dotenv": "^8.1.0",
-    "nuxt": "^2.8.1",
+    "nuxt": "^2.15.8",
     "vue-carousel": "^0.18.0",
     "vue-owl-carousel": "^2.0.3",
     "vue-resource": "^1.5.1",
